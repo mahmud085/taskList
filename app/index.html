@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body ng-app="taskListApp">
+<div id="wrapper">
+    <div id="sidebar-wrapper" ng-controller="labelController">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"><a href="#">Task Tracker</a></li>
+            <li><a href="#" class="inbox_icon">Inbox</a><div class="todo-badge">{{getTasksLengthForLabel('Inbox')}}</div></li>
+            <li><a href="#"  class="all_icon">All Tasks</a><div class="todo-badge">{{getAllTasksLength()}}</div></li>
+            <li><a href="#"  class="pending_icon">All Pending</a><div class="todo-badge">{{getPendingTasksLength()}}</div></li>
+            <li><br></li>
+
+            <li ng-repeat="label in data">
+                <div class="circle" ng-class="label.color"></div>
+                <a href="#">{{label.name}}</a>
+                <div class="todo-badge">{{getTasksLengthForLabel(label.name)}}</div>
+            </li>
+
+
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="panel panel-default bg-container" id="page-header">
+            <div class="panel-body">
+                <div class="panel-top-header padding-header">
+                    <form class="form-horizontal form-padding">
+                        <div class="row height-65">
+                            <label class="col-sm-1 filter-text">Filter By :</label>
+                            <div class="col-sm-2 filter-input"><input type="text" class="form-control" /></div>
+                            <button type="button" id="btnCreateLabel" class="btn btn-danger pull-right btn-task-category" onclick="javascript:window.open('createLabel.html','_self')">Create Label</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="padding-20" id="page-body" ng-controller="taskListController">
+            <div class="panel panel-default bg-update">
+                <div class="panel-body">
+                    <div class="panel-top-header">
+                        Inbox
+                        <i class="fa fa-pencil-square-o pull-right action-icon"></i>
+                    </div>
+
+                    <div class="padding-20">
+                        <form class="form-horizontal form-padding padding-bottom-20" >
+                            <div class="row">
+                                <div class="col-sm-10" >
+                                    <input type="text" class="form-control input-create-task" placeholder="Create New Task"/>
+                                </div>
+                                <div class="col-sm-1">
+
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-info pull-right" onclick="javascript:window.open('createTask.html','_self')">Add Task</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="task in data1">
+                                <input id="{{task.id}}" type="checkbox" checked>
+                                <label for="{{task.id}}" class='checkbox-label'>{{task.name}}</label>
+                                <span class="glyphicon glyphicon-trash pull-right action-icon"  aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-pencil pull-right action-icon"  aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-star-empty pull-right action-icon"  aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-time pull-right action-icon"  aria-hidden="true"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/label.js"></script>
+        <script src="scripts/controllers/task.js"></script>
+        <script src="scripts/services/common-services.js"></script>
+</body>
+</html>
