@@ -1,6 +1,10 @@
+'use strict';
 var module=angular.module('taskListApp');
 
-module.controller('labelController',function($scope,dataService){
+module.controller('labelController',
+     ['$scope','dataService','$state','$stateParams',
+    function($scope,dataService,$state,$stateParams){
+    
     dataService.loadTaskData()
     .then(function(data){
             $scope.data = dataService.getAllLabels();
@@ -19,5 +23,9 @@ module.controller('labelController',function($scope,dataService){
     $scope.getAllTasksLength=function(){
         return dataService.getAllTasks().length;
     };
-
-});
+    $scope.setLabel=function(label){
+        console.log("inside label","Label = ",label);
+        dataService.setSelectedLabel(label);
+        $state.transitionTo('showTasks',$stateParams,{reload:true});
+    };
+}]);

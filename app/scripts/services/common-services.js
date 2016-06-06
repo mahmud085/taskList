@@ -1,5 +1,7 @@
+'use strict';
 var module = angular.module('taskListApp');
 module.service('dataService',function($http,$q){
+    var selectedLabel = "";
     var arrLabels = [];
     var arrAllTasks = [];
 
@@ -41,5 +43,14 @@ module.service('dataService',function($http,$q){
     			}
     		});
     	return tasks;
+    };
+    this.setSelectedLabel = function(label){
+        selectedLabel = label;
+    };
+    this.getSelectedLabel = function(){
+        if(selectedLabel=="") {
+            selectedLabel = "Inbox";
+        }
+        return selectedLabel;
     };
 });
