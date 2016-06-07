@@ -53,4 +53,25 @@ module.service('dataService',function($http,$q){
         }
         return selectedLabel;
     };
+    this.addNewLabel=function(label){
+        arrLabels.push(label);
+    };
+    this.addNewTask=function(tasks){
+        arrAllTasks.push(tasks);
+    };
+    this.updateTask=function(updatedTask){
+        angular.forEach(arrAllTasks, function(task, key) {
+            if(task.id===updatedTask.id){
+                arrAllTasks[key]=updatedTask;
+            }
+        });
+    };
+
+    this.deleteTask=function(deletedTask){
+        angular.forEach(arrAllTasks, function(task, key) {
+            if(task.id===deletedTask.id){
+                arrAllTasks.splice(key,1);
+            }
+        });
+    };
 });
